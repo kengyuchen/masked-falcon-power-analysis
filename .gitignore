@@ -1,0 +1,39 @@
+# ---- Generated attack data (produced by gen_trace.ipynb) ----
+hashes/
+truncated_traces/
+raw_traces/
+plaintexts.txt
+
+# Large NumPy arrays, except the shipped example key f.npy
+*.npy
+
+# ---- ELMO build artifacts and outputs ----
+ELMO/elmo
+ELMO/FPR/*.bin
+ELMO/FPR/*.elf
+ELMO/FPR/*.map
+ELMO/output/traces/*.trc
+ELMO/output/printdata.txt
+
+# Ignore compiled objects (e.g. FprMul.o), but keep the prebuilt ones
+# that ELMO ships and that FprMul.bin needs to link against.
+ELMO/**/*.o
+!ELMO/**/elmoasmfunctions.o
+!ELMO/**/vector.o
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# ---- Jupyter ----
+.ipynb_checkpoints/
+
+# ---- OS / editor ----
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp

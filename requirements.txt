@@ -1,0 +1,14 @@
+# Python 3.8+ recommended (developed on 3.8).
+# For exact reproducibility, replace the lower bounds below with the versions
+# you used, e.g. run:  pip freeze > requirements.txt
+
+# Core numerics used by the attack and utility modules
+numpy>=1.21
+scipy>=1.9          # pearsonr().statistic requires SciPy >= 1.9
+
+# Needed to run the notebooks (gen_trace.ipynb, attack.ipynb)
+tqdm>=4.60          # tqdm.notebook progress bars
+matplotlib>=3.4
+ipympl>=0.9         # the %matplotlib ipympl backend
+ipywidgets>=7.6     # pulled in by tqdm.notebook and ipympl
+jupyterlab>=3.0     # or: notebook

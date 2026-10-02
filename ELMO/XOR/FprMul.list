@@ -1,0 +1,735 @@
+
+FprMul.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+08000000 <vector_table>:
+ 8000000:	00 20 00 20 c5 00 00 08 c3 00 00 08 c1 00 00 08     . . ............
+	...
+ 800002c:	c3 00 00 08 00 00 00 00 00 00 00 00 c3 00 00 08     ................
+ 800003c:	c3 00 00 08 c1 00 00 08 c1 00 00 08 c1 00 00 08     ................
+ 800004c:	c1 00 00 08 c1 00 00 08 c1 00 00 08 c1 00 00 08     ................
+ 800005c:	c1 00 00 08 c1 00 00 08 c1 00 00 08 c1 00 00 08     ................
+ 800006c:	c1 00 00 08 c1 00 00 08 c1 00 00 08 c1 00 00 08     ................
+ 800007c:	c1 00 00 08 c1 00 00 08 c1 00 00 08 c1 00 00 08     ................
+ 800008c:	c1 00 00 08 c1 00 00 08 c1 00 00 08 c1 00 00 08     ................
+ 800009c:	c1 00 00 08 c1 00 00 08 c1 00 00 08 c1 00 00 08     ................
+ 80000ac:	c1 00 00 08 c1 00 00 08 c1 00 00 08 c1 00 00 08     ................
+ 80000bc:	c1 00 00 08                                         ....
+
+080000c0 <blocking_handler>:
+ 80000c0:	e7fe      	b.n	80000c0 <blocking_handler>
+
+080000c2 <null_handler>:
+ 80000c2:	4770      	bx	lr
+
+080000c4 <reset_handler>:
+ 80000c4:	2200      	movs	r2, #0
+ 80000c6:	4814      	ldr	r0, [pc, #80]	; (8000118 <reset_handler+0x54>)
+ 80000c8:	4b14      	ldr	r3, [pc, #80]	; (800011c <reset_handler+0x58>)
+ 80000ca:	4915      	ldr	r1, [pc, #84]	; (8000120 <reset_handler+0x5c>)
+ 80000cc:	1814      	adds	r4, r2, r0
+ 80000ce:	18d0      	adds	r0, r2, r3
+ 80000d0:	4288      	cmp	r0, r1
+ 80000d2:	d203      	bcs.n	80000dc <reset_handler+0x18>
+ 80000d4:	6824      	ldr	r4, [r4, #0]
+ 80000d6:	3204      	adds	r2, #4
+ 80000d8:	6004      	str	r4, [r0, #0]
+ 80000da:	e7f4      	b.n	80000c6 <reset_handler+0x2>
+ 80000dc:	4a11      	ldr	r2, [pc, #68]	; (8000124 <reset_handler+0x60>)
+ 80000de:	4290      	cmp	r0, r2
+ 80000e0:	d202      	bcs.n	80000e8 <reset_handler+0x24>
+ 80000e2:	2100      	movs	r1, #0
+ 80000e4:	c002      	stmia	r0!, {r1}
+ 80000e6:	e7f9      	b.n	80000dc <reset_handler+0x18>
+ 80000e8:	4c0f      	ldr	r4, [pc, #60]	; (8000128 <reset_handler+0x64>)
+ 80000ea:	4810      	ldr	r0, [pc, #64]	; (800012c <reset_handler+0x68>)
+ 80000ec:	4284      	cmp	r4, r0
+ 80000ee:	d202      	bcs.n	80000f6 <reset_handler+0x32>
+ 80000f0:	cc08      	ldmia	r4!, {r3}
+ 80000f2:	4798      	blx	r3
+ 80000f4:	e7f9      	b.n	80000ea <reset_handler+0x26>
+ 80000f6:	4c0e      	ldr	r4, [pc, #56]	; (8000130 <reset_handler+0x6c>)
+ 80000f8:	4b0e      	ldr	r3, [pc, #56]	; (8000134 <reset_handler+0x70>)
+ 80000fa:	429c      	cmp	r4, r3
+ 80000fc:	d202      	bcs.n	8000104 <reset_handler+0x40>
+ 80000fe:	cc01      	ldmia	r4!, {r0}
+ 8000100:	4780      	blx	r0
+ 8000102:	e7f9      	b.n	80000f8 <reset_handler+0x34>
+ 8000104:	f000 f822 	bl	800014c <main>
+ 8000108:	4c0b      	ldr	r4, [pc, #44]	; (8000138 <reset_handler+0x74>)
+ 800010a:	490c      	ldr	r1, [pc, #48]	; (800013c <reset_handler+0x78>)
+ 800010c:	428c      	cmp	r4, r1
+ 800010e:	d202      	bcs.n	8000116 <reset_handler+0x52>
+ 8000110:	cc04      	ldmia	r4!, {r2}
+ 8000112:	4790      	blx	r2
+ 8000114:	e7f9      	b.n	800010a <reset_handler+0x46>
+ 8000116:	46c0      	nop			; (mov r8, r8)
+ 8000118:	08000498 	.word	0x08000498
+ 800011c:	20000000 	.word	0x20000000
+ 8000120:	20000000 	.word	0x20000000
+ 8000124:	20000000 	.word	0x20000000
+ 8000128:	08000498 	.word	0x08000498
+ 800012c:	08000498 	.word	0x08000498
+ 8000130:	08000498 	.word	0x08000498
+ 8000134:	08000498 	.word	0x08000498
+ 8000138:	08000498 	.word	0x08000498
+ 800013c:	08000498 	.word	0x08000498
+
+08000140 <get_fpr_elmo>:
+
+uint64_t get_fpr_elmo(void) {
+	uint32_t high, low;
+	uint64_t c;
+
+    high = *ELMO_READER; 
+ 8000140:	23e1      	movs	r3, #225	; 0xe1
+ 8000142:	061b      	lsls	r3, r3, #24
+ 8000144:	6819      	ldr	r1, [r3, #0]
+    low  = *ELMO_READER;
+ 8000146:	6818      	ldr	r0, [r3, #0]
+    c = ((uint64_t)high << 32) | low;
+	return c;
+}
+ 8000148:	4770      	bx	lr
+	...
+
+0800014c <main>:
+
+int main(void) {
+ 800014c:	b5f0      	push	{r4, r5, r6, r7, lr}
+ 800014e:	4c16      	ldr	r4, [pc, #88]	; (80001a8 <main+0x5c>)
+ 8000150:	b085      	sub	sp, #20
+	f_im = 4625802639892893324ULL; // 18.15231417894988
+    
+    for(i=0;i<NOTRACES;i++){
+        
+        // Set up inputs and key.
+		c_re = get_fpr_elmo();
+ 8000152:	f7ff fff5 	bl	8000140 <get_fpr_elmo>
+ 8000156:	0006      	movs	r6, r0
+ 8000158:	000d      	movs	r5, r1
+		c_im = get_fpr_elmo();
+ 800015a:	f7ff fff1 	bl	8000140 <get_fpr_elmo>
+
+		/*init_prng_table(i);*/
+		/*init_nshares(x_re, sx_mask, ex_mask, xu_mask, SHAREN);*/
+		/*init_nshares(y_re, sy_mask, ey_mask, yu_mask, SHAREN);*/
+        
+        starttrigger();
+ 800015e:	f000 f829 	bl	80001b4 <starttrigger>
+        
+			res_re = (uint64_t)fpr_mul((fpr)f_re, (fpr)c_re);
+ 8000162:	0032      	movs	r2, r6
+ 8000164:	002b      	movs	r3, r5
+ 8000166:	4811      	ldr	r0, [pc, #68]	; (80001ac <main+0x60>)
+ 8000168:	4911      	ldr	r1, [pc, #68]	; (80001b0 <main+0x64>)
+ 800016a:	f000 f8c1 	bl	80002f0 <falcon_inner_fpr_mul>
+			/*SecFprMul_nshares(sx_mask, ex_mask, xu_mask, sy_mask, ey_mask, yu_mask, result, SHAREN);*/
+        
+        endtrigger();
+ 800016e:	2538      	movs	r5, #56	; 0x38
+			res_re = (uint64_t)fpr_mul((fpr)f_re, (fpr)c_re);
+ 8000170:	0006      	movs	r6, r0
+ 8000172:	9101      	str	r1, [sp, #4]
+        endtrigger();
+ 8000174:	f000 f827 	bl	80001c6 <endtrigger>
+        
+		/*uint8_t b = prng_pt & 0XFF;*/
+		for (int j = 0; j < 8; j++){
+	        uint8_t b = (res_re >> (56 - j * 8)) & 0xFF;
+ 8000178:	ab02      	add	r3, sp, #8
+ 800017a:	002a      	movs	r2, r5
+ 800017c:	9901      	ldr	r1, [sp, #4]
+ 800017e:	0030      	movs	r0, r6
+ 8000180:	1ddf      	adds	r7, r3, #7
+ 8000182:	f000 f94f 	bl	8000424 <__aeabi_llsr>
+		for (int j = 0; j < 8; j++){
+ 8000186:	3d08      	subs	r5, #8
+	        uint8_t b = (res_re >> (56 - j * 8)) & 0xFF;
+ 8000188:	7038      	strb	r0, [r7, #0]
+	        printbyte(&b);
+ 800018a:	0038      	movs	r0, r7
+ 800018c:	f000 f84f 	bl	800022e <printbyte>
+		for (int j = 0; j < 8; j++){
+ 8000190:	002b      	movs	r3, r5
+ 8000192:	3308      	adds	r3, #8
+ 8000194:	d1f0      	bne.n	8000178 <main+0x2c>
+    for(i=0;i<NOTRACES;i++){
+ 8000196:	3c01      	subs	r4, #1
+ 8000198:	2c00      	cmp	r4, #0
+ 800019a:	d1da      	bne.n	8000152 <main+0x6>
+		}
+    }
+    
+    endprogram();
+ 800019c:	f000 f84e 	bl	800023c <endprogram>
+
+    return 0;
+}
+ 80001a0:	0020      	movs	r0, r4
+ 80001a2:	b005      	add	sp, #20
+ 80001a4:	bdf0      	pop	{r4, r5, r6, r7, pc}
+ 80001a6:	46c0      	nop			; (mov r8, r8)
+ 80001a8:	00001388 	.word	0x00001388
+ 80001ac:	8e8c4103 	.word	0x8e8c4103
+ 80001b0:	404f2f32 	.word	0x404f2f32
+
+080001b4 <starttrigger>:
+ 80001b4:	b4ff      	push	{r0, r1, r2, r3, r4, r5, r6, r7}
+ 80001b6:	24e0      	movs	r4, #224	; 0xe0
+ 80001b8:	0624      	lsls	r4, r4, #24
+ 80001ba:	2504      	movs	r5, #4
+ 80001bc:	406c      	eors	r4, r5
+ 80001be:	2501      	movs	r5, #1
+ 80001c0:	6025      	str	r5, [r4, #0]
+ 80001c2:	bcff      	pop	{r0, r1, r2, r3, r4, r5, r6, r7}
+ 80001c4:	4770      	bx	lr
+
+080001c6 <endtrigger>:
+ 80001c6:	b4ff      	push	{r0, r1, r2, r3, r4, r5, r6, r7}
+ 80001c8:	24e0      	movs	r4, #224	; 0xe0
+ 80001ca:	0624      	lsls	r4, r4, #24
+ 80001cc:	2504      	movs	r5, #4
+ 80001ce:	406c      	eors	r4, r5
+ 80001d0:	2500      	movs	r5, #0
+ 80001d2:	6025      	str	r5, [r4, #0]
+ 80001d4:	bcff      	pop	{r0, r1, r2, r3, r4, r5, r6, r7}
+ 80001d6:	4770      	bx	lr
+
+080001d8 <readbyte>:
+ 80001d8:	b4ff      	push	{r0, r1, r2, r3, r4, r5, r6, r7}
+ 80001da:	24e1      	movs	r4, #225	; 0xe1
+ 80001dc:	0624      	lsls	r4, r4, #24
+ 80001de:	6821      	ldr	r1, [r4, #0]
+ 80001e0:	7001      	strb	r1, [r0, #0]
+ 80001e2:	bcff      	pop	{r0, r1, r2, r3, r4, r5, r6, r7}
+ 80001e4:	4770      	bx	lr
+
+080001e6 <LoadN>:
+ 80001e6:	b4ff      	push	{r0, r1, r2, r3, r4, r5, r6, r7}
+ 80001e8:	24e1      	movs	r4, #225	; 0xe1
+ 80001ea:	0624      	lsls	r4, r4, #24
+ 80001ec:	2510      	movs	r5, #16
+ 80001ee:	406c      	eors	r4, r5
+ 80001f0:	6821      	ldr	r1, [r4, #0]
+ 80001f2:	6001      	str	r1, [r0, #0]
+ 80001f4:	bcff      	pop	{r0, r1, r2, r3, r4, r5, r6, r7}
+ 80001f6:	4770      	bx	lr
+
+080001f8 <randbyte>:
+ 80001f8:	b4ff      	push	{r0, r1, r2, r3, r4, r5, r6, r7}
+ 80001fa:	24e1      	movs	r4, #225	; 0xe1
+ 80001fc:	0624      	lsls	r4, r4, #24
+ 80001fe:	2504      	movs	r5, #4
+ 8000200:	406c      	eors	r4, r5
+ 8000202:	6821      	ldr	r1, [r4, #0]
+ 8000204:	7001      	strb	r1, [r0, #0]
+ 8000206:	bcff      	pop	{r0, r1, r2, r3, r4, r5, r6, r7}
+ 8000208:	4770      	bx	lr
+
+0800020a <getstart>:
+ 800020a:	b4ff      	push	{r0, r1, r2, r3, r4, r5, r6, r7}
+ 800020c:	24e1      	movs	r4, #225	; 0xe1
+ 800020e:	0624      	lsls	r4, r4, #24
+ 8000210:	2508      	movs	r5, #8
+ 8000212:	406c      	eors	r4, r5
+ 8000214:	6821      	ldr	r1, [r4, #0]
+ 8000216:	6001      	str	r1, [r0, #0]
+ 8000218:	bcff      	pop	{r0, r1, r2, r3, r4, r5, r6, r7}
+ 800021a:	4770      	bx	lr
+
+0800021c <getruncount>:
+ 800021c:	b4ff      	push	{r0, r1, r2, r3, r4, r5, r6, r7}
+ 800021e:	24e1      	movs	r4, #225	; 0xe1
+ 8000220:	0624      	lsls	r4, r4, #24
+ 8000222:	250c      	movs	r5, #12
+ 8000224:	406c      	eors	r4, r5
+ 8000226:	6821      	ldr	r1, [r4, #0]
+ 8000228:	6001      	str	r1, [r0, #0]
+ 800022a:	bcff      	pop	{r0, r1, r2, r3, r4, r5, r6, r7}
+ 800022c:	4770      	bx	lr
+
+0800022e <printbyte>:
+ 800022e:	b4ff      	push	{r0, r1, r2, r3, r4, r5, r6, r7}
+ 8000230:	24e0      	movs	r4, #224	; 0xe0
+ 8000232:	0624      	lsls	r4, r4, #24
+ 8000234:	7805      	ldrb	r5, [r0, #0]
+ 8000236:	6025      	str	r5, [r4, #0]
+ 8000238:	bcff      	pop	{r0, r1, r2, r3, r4, r5, r6, r7}
+ 800023a:	4770      	bx	lr
+
+0800023c <endprogram>:
+ 800023c:	b4ff      	push	{r0, r1, r2, r3, r4, r5, r6, r7}
+ 800023e:	24f0      	movs	r4, #240	; 0xf0
+ 8000240:	0624      	lsls	r4, r4, #24
+ 8000242:	2500      	movs	r5, #0
+ 8000244:	6025      	str	r5, [r4, #0]
+ 8000246:	bcff      	pop	{r0, r1, r2, r3, r4, r5, r6, r7}
+ 8000248:	4770      	bx	lr
+
+0800024a <initialisemaskflow>:
+ 800024a:	b4ff      	push	{r0, r1, r2, r3, r4, r5, r6, r7}
+ 800024c:	24e0      	movs	r4, #224	; 0xe0
+ 800024e:	0624      	lsls	r4, r4, #24
+ 8000250:	2540      	movs	r5, #64	; 0x40
+ 8000252:	406c      	eors	r4, r5
+ 8000254:	6020      	str	r0, [r4, #0]
+ 8000256:	bcff      	pop	{r0, r1, r2, r3, r4, r5, r6, r7}
+ 8000258:	4770      	bx	lr
+
+0800025a <resetmaskflow>:
+ 800025a:	b4ff      	push	{r0, r1, r2, r3, r4, r5, r6, r7}
+ 800025c:	24e0      	movs	r4, #224	; 0xe0
+ 800025e:	0624      	lsls	r4, r4, #24
+ 8000260:	2542      	movs	r5, #66	; 0x42
+ 8000262:	406c      	eors	r4, r5
+ 8000264:	2500      	movs	r5, #0
+ 8000266:	6025      	str	r5, [r4, #0]
+ 8000268:	bcff      	pop	{r0, r1, r2, r3, r4, r5, r6, r7}
+ 800026a:	4770      	bx	lr
+
+0800026c <setmaskflowstart>:
+ 800026c:	b4ff      	push	{r0, r1, r2, r3, r4, r5, r6, r7}
+ 800026e:	24e0      	movs	r4, #224	; 0xe0
+ 8000270:	0624      	lsls	r4, r4, #24
+ 8000272:	2544      	movs	r5, #68	; 0x44
+ 8000274:	406c      	eors	r4, r5
+ 8000276:	6020      	str	r0, [r4, #0]
+ 8000278:	bcff      	pop	{r0, r1, r2, r3, r4, r5, r6, r7}
+ 800027a:	4770      	bx	lr
+
+0800027c <resetdatafile>:
+ 800027c:	b4ff      	push	{r0, r1, r2, r3, r4, r5, r6, r7}
+ 800027e:	24e0      	movs	r4, #224	; 0xe0
+ 8000280:	0624      	lsls	r4, r4, #24
+ 8000282:	2546      	movs	r5, #70	; 0x46
+ 8000284:	406c      	eors	r4, r5
+ 8000286:	2500      	movs	r5, #0
+ 8000288:	6025      	str	r5, [r4, #0]
+ 800028a:	bcff      	pop	{r0, r1, r2, r3, r4, r5, r6, r7}
+ 800028c:	4770      	bx	lr
+	...
+
+08000290 <FPR>:
+ * If e >= -1076 and e != 0, m must be within the expected range
+ * (2^54 to 2^55-1).
+ */
+static inline fpr
+FPR(int s, int e, uint64_t m)
+{
+ 8000290:	b5f0      	push	{r4, r5, r6, r7, lr}
+
+	/*
+	 * If e >= -1076, then the value is "normal"; otherwise, it
+	 * should be a subnormal, which we clamp down to zero.
+	 */
+	e += 1076;
+ 8000292:	4c16      	ldr	r4, [pc, #88]	; (80002ec <FPR+0x5c>)
+	t = (uint32_t)e >> 31;
+	m &= (uint64_t)t - 1;
+ 8000294:	2601      	movs	r6, #1
+ 8000296:	4276      	negs	r6, r6
+ 8000298:	17f7      	asrs	r7, r6, #31
+	e += 1076;
+ 800029a:	46a4      	mov	ip, r4
+ 800029c:	448c      	add	ip, r1
+	m &= (uint64_t)t - 1;
+ 800029e:	4661      	mov	r1, ip
+ 80002a0:	0fcc      	lsrs	r4, r1, #31
+ 80002a2:	2100      	movs	r1, #0
+ 80002a4:	000d      	movs	r5, r1
+ 80002a6:	19a4      	adds	r4, r4, r6
+ 80002a8:	417d      	adcs	r5, r7
+ 80002aa:	402b      	ands	r3, r5
+ 80002ac:	4022      	ands	r2, r4
+ 80002ae:	001c      	movs	r4, r3
+	 * The 52 mantissa bits come from m. Value m has its top bit set
+	 * (unless it is a zero); we leave it "as is": the top bit will
+	 * increment the exponent by 1, except when m = 0, which is
+	 * exactly what we want.
+	 */
+	x = (((uint64_t)s << 63) | (m >> 2)) + ((uint64_t)(uint32_t)e << 52);
+ 80002b0:	0895      	lsrs	r5, r2, #2
+ 80002b2:	079b      	lsls	r3, r3, #30
+ 80002b4:	432b      	orrs	r3, r5
+ 80002b6:	001e      	movs	r6, r3
+ 80002b8:	07c0      	lsls	r0, r0, #31
+ 80002ba:	08a3      	lsrs	r3, r4, #2
+ 80002bc:	4318      	orrs	r0, r3
+	 * round-to-nearest rule (with preference to even values in case
+	 * of a tie). Note that the increment may make a carry spill
+	 * into the exponent field, which is again exactly what we want
+	 * in that case.
+	 */
+	f = (unsigned)m & 7U;
+ 80002be:	2307      	movs	r3, #7
+	x = (((uint64_t)s << 63) | (m >> 2)) + ((uint64_t)(uint32_t)e << 52);
+ 80002c0:	0007      	movs	r7, r0
+	x += (0xC8U >> f) & 1;
+ 80002c2:	20c8      	movs	r0, #200	; 0xc8
+	f = (unsigned)m & 7U;
+ 80002c4:	401a      	ands	r2, r3
+	x += (0xC8U >> f) & 1;
+ 80002c6:	2501      	movs	r5, #1
+ 80002c8:	40d0      	lsrs	r0, r2
+ 80002ca:	4028      	ands	r0, r5
+ 80002cc:	0002      	movs	r2, r0
+ 80002ce:	000b      	movs	r3, r1
+	e &= -(int)t;
+ 80002d0:	4660      	mov	r0, ip
+	x += (0xC8U >> f) & 1;
+ 80002d2:	1992      	adds	r2, r2, r6
+ 80002d4:	417b      	adcs	r3, r7
+	x = (((uint64_t)s << 63) | (m >> 2)) + ((uint64_t)(uint32_t)e << 52);
+ 80002d6:	000e      	movs	r6, r1
+	t = (uint32_t)(m >> 54);
+ 80002d8:	0da4      	lsrs	r4, r4, #22
+	e &= -(int)t;
+ 80002da:	4264      	negs	r4, r4
+ 80002dc:	4004      	ands	r4, r0
+	x = (((uint64_t)s << 63) | (m >> 2)) + ((uint64_t)(uint32_t)e << 52);
+ 80002de:	0527      	lsls	r7, r4, #20
+	x += (0xC8U >> f) & 1;
+ 80002e0:	1992      	adds	r2, r2, r6
+ 80002e2:	417b      	adcs	r3, r7
+ 80002e4:	0010      	movs	r0, r2
+ 80002e6:	0019      	movs	r1, r3
+	return x;
+}
+ 80002e8:	bdf0      	pop	{r4, r5, r6, r7, pc}
+ 80002ea:	46c0      	nop			; (mov r8, r8)
+ 80002ec:	00000434 	.word	0x00000434
+
+080002f0 <falcon_inner_fpr_mul>:
+
+#else // yyyASM_CORTEXM4+0
+
+fpr
+fpr_mul(fpr x, fpr y)
+{
+ 80002f0:	b5f0      	push	{r4, r5, r6, r7, lr}
+
+	/*
+	 * Extract absolute values as scaled unsigned integers. We
+	 * don't extract exponents yet.
+	 */
+	xu = (x & (((uint64_t)1 << 52) - 1)) | ((uint64_t)1 << 52);
+ 80002f2:	2480      	movs	r4, #128	; 0x80
+ 80002f4:	2600      	movs	r6, #0
+{
+ 80002f6:	b08b      	sub	sp, #44	; 0x2c
+ 80002f8:	9306      	str	r3, [sp, #24]
+	yu = (y & (((uint64_t)1 << 52) - 1)) | ((uint64_t)1 << 52);
+ 80002fa:	9b06      	ldr	r3, [sp, #24]
+{
+ 80002fc:	9105      	str	r1, [sp, #20]
+	xu = (x & (((uint64_t)1 << 52) - 1)) | ((uint64_t)1 << 52);
+ 80002fe:	0309      	lsls	r1, r1, #12
+ 8000300:	0364      	lsls	r4, r4, #13
+ 8000302:	0b09      	lsrs	r1, r1, #12
+	yu = (y & (((uint64_t)1 << 52) - 1)) | ((uint64_t)1 << 52);
+ 8000304:	031b      	lsls	r3, r3, #12
+	xu = (x & (((uint64_t)1 << 52) - 1)) | ((uint64_t)1 << 52);
+ 8000306:	4321      	orrs	r1, r4
+	yu = (y & (((uint64_t)1 << 52) - 1)) | ((uint64_t)1 << 52);
+ 8000308:	0b1b      	lsrs	r3, r3, #12
+ 800030a:	4323      	orrs	r3, r4
+	 * each into a lower half and a upper half. Moreover, we
+	 * prefer to have lower halves to be of 25 bits each, for
+	 * reasons explained later on.
+	 */
+	x0 = (uint32_t)xu & 0x01FFFFFF;
+	x1 = (uint32_t)(xu >> 25);
+ 800030c:	0e47      	lsrs	r7, r0, #25
+ 800030e:	01cc      	lsls	r4, r1, #7
+ 8000310:	0e49      	lsrs	r1, r1, #25
+ 8000312:	4327      	orrs	r7, r4
+ 8000314:	9102      	str	r1, [sp, #8]
+	y0 = (uint32_t)yu & 0x01FFFFFF;
+	y1 = (uint32_t)(yu >> 25);
+ 8000316:	0e54      	lsrs	r4, r2, #25
+ 8000318:	01d9      	lsls	r1, r3, #7
+ 800031a:	430c      	orrs	r4, r1
+	x0 = (uint32_t)xu & 0x01FFFFFF;
+ 800031c:	01c0      	lsls	r0, r0, #7
+	y0 = (uint32_t)yu & 0x01FFFFFF;
+ 800031e:	01d2      	lsls	r2, r2, #7
+	y1 = (uint32_t)(yu >> 25);
+ 8000320:	9407      	str	r4, [sp, #28]
+	y0 = (uint32_t)yu & 0x01FFFFFF;
+ 8000322:	09d5      	lsrs	r5, r2, #7
+	x0 = (uint32_t)xu & 0x01FFFFFF;
+ 8000324:	09c4      	lsrs	r4, r0, #7
+	y1 = (uint32_t)(yu >> 25);
+ 8000326:	0e5b      	lsrs	r3, r3, #25
+	w = (uint64_t)x0 * (uint64_t)y0;
+ 8000328:	002a      	movs	r2, r5
+	y1 = (uint32_t)(yu >> 25);
+ 800032a:	9308      	str	r3, [sp, #32]
+	w = (uint64_t)x0 * (uint64_t)y0;
+ 800032c:	0020      	movs	r0, r4
+ 800032e:	0033      	movs	r3, r6
+ 8000330:	0031      	movs	r1, r6
+ 8000332:	f000 f883 	bl	800043c <__aeabi_lmul>
+	z0 = (uint32_t)w & 0x01FFFFFF;
+	z1 = (uint32_t)(w >> 25);
+ 8000336:	01c9      	lsls	r1, r1, #7
+ 8000338:	0e43      	lsrs	r3, r0, #25
+ 800033a:	430b      	orrs	r3, r1
+	w = (uint64_t)x0 * (uint64_t)y1;
+ 800033c:	0022      	movs	r2, r4
+	w = (uint64_t)x0 * (uint64_t)y0;
+ 800033e:	9009      	str	r0, [sp, #36]	; 0x24
+	z1 = (uint32_t)(w >> 25);
+ 8000340:	9300      	str	r3, [sp, #0]
+	w = (uint64_t)x0 * (uint64_t)y1;
+ 8000342:	9807      	ldr	r0, [sp, #28]
+ 8000344:	0033      	movs	r3, r6
+ 8000346:	9908      	ldr	r1, [sp, #32]
+ 8000348:	f000 f878 	bl	800043c <__aeabi_lmul>
+	z1 += (uint32_t)w & 0x01FFFFFF;
+ 800034c:	9b00      	ldr	r3, [sp, #0]
+ 800034e:	01c4      	lsls	r4, r0, #7
+ 8000350:	09e4      	lsrs	r4, r4, #7
+ 8000352:	18e4      	adds	r4, r4, r3
+	z2 = (uint32_t)(w >> 25);
+ 8000354:	01c9      	lsls	r1, r1, #7
+ 8000356:	0e43      	lsrs	r3, r0, #25
+ 8000358:	430b      	orrs	r3, r1
+	w = (uint64_t)x1 * (uint64_t)y0;
+ 800035a:	002a      	movs	r2, r5
+ 800035c:	9902      	ldr	r1, [sp, #8]
+	z2 = (uint32_t)(w >> 25);
+ 800035e:	9300      	str	r3, [sp, #0]
+	w = (uint64_t)x1 * (uint64_t)y0;
+ 8000360:	0038      	movs	r0, r7
+ 8000362:	0033      	movs	r3, r6
+ 8000364:	f000 f86a 	bl	800043c <__aeabi_lmul>
+	z1 += (uint32_t)w & 0x01FFFFFF;
+ 8000368:	01c5      	lsls	r5, r0, #7
+ 800036a:	09ed      	lsrs	r5, r5, #7
+	z2 += (uint32_t)(w >> 25);
+ 800036c:	9b00      	ldr	r3, [sp, #0]
+	z1 += (uint32_t)w & 0x01FFFFFF;
+ 800036e:	192d      	adds	r5, r5, r4
+	z2 += (uint32_t)(w >> 25);
+ 8000370:	01c9      	lsls	r1, r1, #7
+ 8000372:	0e44      	lsrs	r4, r0, #25
+ 8000374:	430c      	orrs	r4, r1
+	zu = (uint64_t)x1 * (uint64_t)y1;
+ 8000376:	9a07      	ldr	r2, [sp, #28]
+ 8000378:	9902      	ldr	r1, [sp, #8]
+	z2 += (uint32_t)(w >> 25);
+ 800037a:	191c      	adds	r4, r3, r4
+	zu = (uint64_t)x1 * (uint64_t)y1;
+ 800037c:	0038      	movs	r0, r7
+ 800037e:	9b08      	ldr	r3, [sp, #32]
+ 8000380:	f000 f85c 	bl	800043c <__aeabi_lmul>
+	z2 += (z1 >> 25);
+	z1 &= 0x01FFFFFF;
+	zu += z2;
+ 8000384:	0033      	movs	r3, r6
+	z2 += (z1 >> 25);
+ 8000386:	0e6f      	lsrs	r7, r5, #25
+	zu += z2;
+ 8000388:	193a      	adds	r2, r7, r4
+ 800038a:	1880      	adds	r0, r0, r2
+ 800038c:	4159      	adcs	r1, r3
+	 * is made "sticky". Since the low limbs z0 and z1 are 25 bits
+	 * each, we just take the upper part (zu), and consider z0 and
+	 * z1 only for purposes of stickiness.
+	 * (This is the reason why we chose 25-bit limbs above.)
+	 */
+	zu |= ((z0 | z1) + 0x01FFFFFF) >> 25;
+ 800038e:	9b09      	ldr	r3, [sp, #36]	; 0x24
+	zu += z2;
+ 8000390:	9000      	str	r0, [sp, #0]
+ 8000392:	9101      	str	r1, [sp, #4]
+	zu |= ((z0 | z1) + 0x01FFFFFF) >> 25;
+ 8000394:	431d      	orrs	r5, r3
+ 8000396:	01ea      	lsls	r2, r5, #7
+ 8000398:	4b1f      	ldr	r3, [pc, #124]	; (8000418 <falcon_inner_fpr_mul+0x128>)
+ 800039a:	09d2      	lsrs	r2, r2, #7
+ 800039c:	18d2      	adds	r2, r2, r3
+	 * We normalize zu to the 2^54..s^55-1 range: it could be one
+	 * bit too large at this point. This is done with a conditional
+	 * right-shift that takes into account the sticky bit.
+	 */
+	zv = (zu >> 1) | (zu & 1);
+	w = zu >> 55;
+ 800039e:	9b01      	ldr	r3, [sp, #4]
+	zu |= ((z0 | z1) + 0x01FFFFFF) >> 25;
+ 80003a0:	9800      	ldr	r0, [sp, #0]
+	w = zu >> 55;
+ 80003a2:	0ddb      	lsrs	r3, r3, #23
+ 80003a4:	9302      	str	r3, [sp, #8]
+	zu |= ((z0 | z1) + 0x01FFFFFF) >> 25;
+ 80003a6:	0e52      	lsrs	r2, r2, #25
+	zv = (zu >> 1) | (zu & 1);
+ 80003a8:	9b01      	ldr	r3, [sp, #4]
+	zu |= ((z0 | z1) + 0x01FFFFFF) >> 25;
+ 80003aa:	4310      	orrs	r0, r2
+	w = zu >> 55;
+ 80003ac:	9603      	str	r6, [sp, #12]
+	zv = (zu >> 1) | (zu & 1);
+ 80003ae:	07db      	lsls	r3, r3, #31
+ 80003b0:	0842      	lsrs	r2, r0, #1
+ 80003b2:	3601      	adds	r6, #1
+ 80003b4:	4006      	ands	r6, r0
+ 80003b6:	431a      	orrs	r2, r3
+	zu ^= (zu ^ zv) & -w;
+ 80003b8:	9c02      	ldr	r4, [sp, #8]
+ 80003ba:	9d03      	ldr	r5, [sp, #12]
+	zv = (zu >> 1) | (zu & 1);
+ 80003bc:	4332      	orrs	r2, r6
+	zu ^= (zu ^ zv) & -w;
+ 80003be:	2700      	movs	r7, #0
+ 80003c0:	4266      	negs	r6, r4
+ 80003c2:	41af      	sbcs	r7, r5
+	zv = (zu >> 1) | (zu & 1);
+ 80003c4:	9b01      	ldr	r3, [sp, #4]
+	zu ^= (zu ^ zv) & -w;
+ 80003c6:	9901      	ldr	r1, [sp, #4]
+	zv = (zu >> 1) | (zu & 1);
+ 80003c8:	085b      	lsrs	r3, r3, #1
+	zu ^= (zu ^ zv) & -w;
+ 80003ca:	404b      	eors	r3, r1
+ 80003cc:	403b      	ands	r3, r7
+ 80003ce:	404b      	eors	r3, r1
+	 *     by 0 or 1 extra bit (depending on the value of w).
+	 *
+	 * In total, we must add the exponents, then subtract
+	 * 2 * (1023 + 52), then add 50 + w.
+	 */
+	ex = (int)((x >> 52) & 0x7FF);
+ 80003d0:	9905      	ldr	r1, [sp, #20]
+	zu ^= (zu ^ zv) & -w;
+ 80003d2:	4042      	eors	r2, r0
+	ex = (int)((x >> 52) & 0x7FF);
+ 80003d4:	004d      	lsls	r5, r1, #1
+	ey = (int)((y >> 52) & 0x7FF);
+ 80003d6:	9906      	ldr	r1, [sp, #24]
+	zu ^= (zu ^ zv) & -w;
+ 80003d8:	4032      	ands	r2, r6
+	ey = (int)((y >> 52) & 0x7FF);
+ 80003da:	0049      	lsls	r1, r1, #1
+ 80003dc:	0d49      	lsrs	r1, r1, #21
+ 80003de:	468c      	mov	ip, r1
+	 * Corrective actions for zeros: if either of the operands is
+	 * zero, then the computations above were wrong. Test for zero
+	 * is whether ex or ey is zero. We just have to set the mantissa
+	 * (zu) to zero, the FPR() function will normalize e.
+	 */
+	d = ((ex + 0x7FF) & (ey + 0x7FF)) >> 11;
+ 80003e0:	4e0e      	ldr	r6, [pc, #56]	; (800041c <falcon_inner_fpr_mul+0x12c>)
+ 80003e2:	490e      	ldr	r1, [pc, #56]	; (800041c <falcon_inner_fpr_mul+0x12c>)
+	ex = (int)((x >> 52) & 0x7FF);
+ 80003e4:	0d6d      	lsrs	r5, r5, #21
+	d = ((ex + 0x7FF) & (ey + 0x7FF)) >> 11;
+ 80003e6:	1869      	adds	r1, r5, r1
+ 80003e8:	4466      	add	r6, ip
+ 80003ea:	400e      	ands	r6, r1
+	zu ^= (zu ^ zv) & -w;
+ 80003ec:	4042      	eors	r2, r0
+	zu &= -(uint64_t)d;
+ 80003ee:	17f1      	asrs	r1, r6, #31
+ 80003f0:	12f0      	asrs	r0, r6, #11
+ 80003f2:	2700      	movs	r7, #0
+ 80003f4:	4246      	negs	r6, r0
+ 80003f6:	418f      	sbcs	r7, r1
+	e = ex + ey - 2100 + (int)w;
+ 80003f8:	0029      	movs	r1, r5
+ 80003fa:	4809      	ldr	r0, [pc, #36]	; (8000420 <falcon_inner_fpr_mul+0x130>)
+ 80003fc:	4461      	add	r1, ip
+ 80003fe:	1809      	adds	r1, r1, r0
+ 8000400:	9802      	ldr	r0, [sp, #8]
+	s = (int)((x ^ y) >> 63);
+ 8000402:	9c06      	ldr	r4, [sp, #24]
+	e = ex + ey - 2100 + (int)w;
+ 8000404:	1809      	adds	r1, r1, r0
+	s = (int)((x ^ y) >> 63);
+ 8000406:	9805      	ldr	r0, [sp, #20]
+	zu &= -(uint64_t)d;
+ 8000408:	4032      	ands	r2, r6
+	s = (int)((x ^ y) >> 63);
+ 800040a:	4060      	eors	r0, r4
+	zu &= -(uint64_t)d;
+ 800040c:	403b      	ands	r3, r7
+	s = (int)((x ^ y) >> 63);
+ 800040e:	0fc0      	lsrs	r0, r0, #31
+
+	/*
+	 * FPR() packs the result and applies proper rounding.
+	 */
+	return FPR(s, e, zu);
+ 8000410:	f7ff ff3e 	bl	8000290 <FPR>
+}
+ 8000414:	b00b      	add	sp, #44	; 0x2c
+ 8000416:	bdf0      	pop	{r4, r5, r6, r7, pc}
+ 8000418:	01ffffff 	.word	0x01ffffff
+ 800041c:	000007ff 	.word	0x000007ff
+ 8000420:	fffff7cc 	.word	0xfffff7cc
+
+08000424 <__aeabi_llsr>:
+ 8000424:	40d0      	lsrs	r0, r2
+ 8000426:	000b      	movs	r3, r1
+ 8000428:	40d1      	lsrs	r1, r2
+ 800042a:	469c      	mov	ip, r3
+ 800042c:	3a20      	subs	r2, #32
+ 800042e:	40d3      	lsrs	r3, r2
+ 8000430:	4318      	orrs	r0, r3
+ 8000432:	4252      	negs	r2, r2
+ 8000434:	4663      	mov	r3, ip
+ 8000436:	4093      	lsls	r3, r2
+ 8000438:	4318      	orrs	r0, r3
+ 800043a:	4770      	bx	lr
+
+0800043c <__aeabi_lmul>:
+ 800043c:	b5f0      	push	{r4, r5, r6, r7, lr}
+ 800043e:	46ce      	mov	lr, r9
+ 8000440:	4647      	mov	r7, r8
+ 8000442:	b580      	push	{r7, lr}
+ 8000444:	0007      	movs	r7, r0
+ 8000446:	4699      	mov	r9, r3
+ 8000448:	0c3b      	lsrs	r3, r7, #16
+ 800044a:	469c      	mov	ip, r3
+ 800044c:	0413      	lsls	r3, r2, #16
+ 800044e:	0c1b      	lsrs	r3, r3, #16
+ 8000450:	001d      	movs	r5, r3
+ 8000452:	000e      	movs	r6, r1
+ 8000454:	4661      	mov	r1, ip
+ 8000456:	0400      	lsls	r0, r0, #16
+ 8000458:	0c14      	lsrs	r4, r2, #16
+ 800045a:	0c00      	lsrs	r0, r0, #16
+ 800045c:	4345      	muls	r5, r0
+ 800045e:	434b      	muls	r3, r1
+ 8000460:	4360      	muls	r0, r4
+ 8000462:	4361      	muls	r1, r4
+ 8000464:	18c0      	adds	r0, r0, r3
+ 8000466:	0c2c      	lsrs	r4, r5, #16
+ 8000468:	1820      	adds	r0, r4, r0
+ 800046a:	468c      	mov	ip, r1
+ 800046c:	4283      	cmp	r3, r0
+ 800046e:	d903      	bls.n	8000478 <__aeabi_lmul+0x3c>
+ 8000470:	2380      	movs	r3, #128	; 0x80
+ 8000472:	025b      	lsls	r3, r3, #9
+ 8000474:	4698      	mov	r8, r3
+ 8000476:	44c4      	add	ip, r8
+ 8000478:	4649      	mov	r1, r9
+ 800047a:	4379      	muls	r1, r7
+ 800047c:	4372      	muls	r2, r6
+ 800047e:	0c03      	lsrs	r3, r0, #16
+ 8000480:	4463      	add	r3, ip
+ 8000482:	042d      	lsls	r5, r5, #16
+ 8000484:	0c2d      	lsrs	r5, r5, #16
+ 8000486:	18c9      	adds	r1, r1, r3
+ 8000488:	0400      	lsls	r0, r0, #16
+ 800048a:	1940      	adds	r0, r0, r5
+ 800048c:	1889      	adds	r1, r1, r2
+ 800048e:	bcc0      	pop	{r6, r7}
+ 8000490:	46b9      	mov	r9, r7
+ 8000492:	46b0      	mov	r8, r6
+ 8000494:	bdf0      	pop	{r4, r5, r6, r7, pc}
+ 8000496:	46c0      	nop			; (mov r8, r8)
